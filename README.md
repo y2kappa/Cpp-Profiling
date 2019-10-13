@@ -1,8 +1,77 @@
 # Complexity testing with Google Benchmarks
 
+Demo usage of [Google Benchmark](https://github.com/google/benchmark) and [Google Test](https://github.com/google/googletest) to illustrate correctness and complexity of algorithms and implementations.
+
+Example:
+- Fibonnaci recursive where it's exponential:
+```cpp
+unsigned int fib_recursive(const unsigned int n)
+{
+    if (n <= 1)
+        return n;
+
+    return (fib_recursive(n-1) + fib_recursive(n-2));
+}
+```
+- Fibonacci linear with vectors
+```cpp
+unsigned int fib_iterative(const unsigned int n)
+{
+    if (n <= 1) return n;
+
+    std::vector<unsigned int> f{0, 1};
+
+    for (size_t i=2; i <= n; ++i) { f.push_back(f[i-1] + f[i-2]); }
+    return f[n];
+}
+```
+
+Test:
+
+```
+: g++ fibonnaci.t.cpp fibonnaci.cpp -o fibonnaci.t.tsk --std=c++14 -L googletest/ -l gtest
+: ./fibonnaci.t.tsk
+[==========] Running 7 tests from 3 test cases.
+[----------] Global test environment set-up.
+[----------] 3 tests from Iterative
+[ RUN      ] Iterative.Works0
+[       OK ] Iterative.Works0 (0 ms)
+[ RUN      ] Iterative.Works1
+[       OK ] Iterative.Works1 (0 ms)
+[ RUN      ] Iterative.Works2
+[       OK ] Iterative.Works2 (0 ms)
+[----------] 3 tests from Iterative (0 ms total)
+
+[----------] 3 tests from Recursive
+[ RUN      ] Recursive.Works0
+[       OK ] Recursive.Works0 (0 ms)
+[ RUN      ] Recursive.Works1
+[       OK ] Recursive.Works1 (0 ms)
+[ RUN      ] Recursive.Works2
+[       OK ] Recursive.Works2 (0 ms)
+[----------] 3 tests from Recursive (0 ms total)
+
+[----------] 1 test from Both
+[ RUN      ] Both.Work
+[       OK ] Both.Work (0 ms)
+[----------] 1 test from Both (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 7 tests from 3 test cases ran. (0 ms total)
+[  PASSED  ] 7 tests.
+```
+
+Behchmarking:
+
+```
+
+```
+
 Can see where it's exponential, where it's squared and where it's logarithmic.
 
-## make
+
+
+## Build
 ```sh
 git clone https://github.com/google/benchmark.git
 g++ benching.cpp bubblesort.cpp fibonnaci.cpp quicksort.cpp -o benching.tsk --std=c++11  -lbenchmark -L benchmark/
@@ -47,3 +116,24 @@ Bubblesort/3125         19957159 ns   19880171 ns         35
 Bubblesort/10000       197616120 ns  197015667 ns          3
 
 ```
+
+## TODO
+
+- [ ] Create table for execution time for diff algos & impls
+- [ ] Add tests for:
+  - [ ] Heapsort
+  - [ ] N Body Problem Calculations
+  - [ ] FizzBuzz
+  - [ ] Matrix Multiplication
+  - [ ] Sudoku solver
+
+- [ ] Check new releases from lib and test use them
+  - [ ] test https://github.com/google/googletest
+  - [ ] bench https://github.com/google/benchmark
+- [ ] Check property base testing in C++
+- [ ] Try to call into Rust (FFI)
+- [ ] Contribute to the same lib for Rust
+  - [ ] https://github.com/bheisler/criterion.rs
+- [ ] Property based testing Rust
+  - [ ] https://github.com/BurntSushi/quickcheck
+  - [ ] https://github.com/AltSysrq/proptest
