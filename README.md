@@ -1,4 +1,15 @@
-# Complexity testing with Google Benchmarks
+# Complexity & Unit testing with Google Benchmarks & Tests
+
+## Getting Started
+
+```
+git clone git@github.com:y2kappa/CppProfiling.git
+cd CppProfiling
+git clone git@github.com:google/benchmark.git
+git clone git@github.com:google/googletest.git
+```
+
+## What's it about
 
 Demo usage of [Google Benchmark](https://github.com/google/benchmark) and [Google Test](https://github.com/google/googletest) to illustrate correctness and complexity of algorithms and implementations.
 
@@ -126,6 +137,9 @@ Bubblesort/10000       197616120 ns  197015667 ns          3
   - [ ] FizzBuzz
   - [ ] Matrix Multiplication
   - [ ] Sudoku solver
+  - [ ] Multi threading test
+  - [ ] Concurrent Hash Maps
+  - [ ]
 
 - [ ] Check new releases from lib and test use them
   - [ ] test https://github.com/google/googletest
@@ -137,3 +151,5 @@ Bubblesort/10000       197616120 ns  197015667 ns          3
 - [ ] Property based testing Rust
   - [ ] https://github.com/BurntSushi/quickcheck
   - [ ] https://github.com/AltSysrq/proptest
+- [ ] Add CMake
+- [ ]
