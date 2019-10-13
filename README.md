@@ -1,17 +1,11 @@
 # Complexity & Unit testing with Google Benchmarks & Tests
 
-## Getting Started
-
-```
-git clone git@github.com:y2kappa/CppProfiling.git
-cd CppProfiling
-git clone git@github.com:google/benchmark.git
-git clone git@github.com:google/googletest.git
-```
 
 ## What's it about
 
-Demo usage of [Google Benchmark](https://github.com/google/benchmark) and [Google Test](https://github.com/google/googletest) to illustrate correctness and complexity of algorithms and implementations.
+Demo usage of [Google Benchmark](https://github.com/google/benchmark) and [Google Test](https://github.com/google/googletest) to illustrate correctness and complexity of algorithms and implementations. **It's easy conceptually to understand what O(logn) complexity means but it's doesn't really relate to any real life values. How bad is O(n2) vs O(logn) in real life, in what situations, what inputs?**
+
+**For example recursive fibonnaci (exponential took) 91.138250241 seconds for 50 elements, whereas the linear complexity algo took 0.000002 seconds. That's like 10^8 longer.**
 
 Example:
 - Fibonnaci recursive where it's exponential:
@@ -72,21 +66,64 @@ Test:
 [  PASSED  ] 7 tests.
 ```
 
-Behchmarking:
+Benchmarking:
+
+```
+: _build/fibonnaci/fibonnaci.b.tsk
+Run on (4 X 2900 MHz CPU s)
+2019-10-13 14:30:34
+***WARNING*** Library was built as DEBUG. Timings may be affected.
+--------------------------------------------------------------
+Benchmark                       Time           CPU Iterations
+--------------------------------------------------------------
+FibonnaciRecursive/2           14 ns         14 ns   48074282
+FibonnaciRecursive/4           28 ns         28 ns   23950293
+FibonnaciRecursive/8          157 ns        156 ns    4488417
+FibonnaciRecursive/16        7073 ns       7066 ns      98453
+FibonnaciRecursive/32    15670324 ns   15598578 ns         45
+FibonnaciRecursive/40   744359036 ns  739870000 ns          1
+FibonnaciIterative/2          425 ns        425 ns    1633571
+FibonnaciIterative/4          762 ns        760 ns     925583
+FibonnaciIterative/8         1150 ns       1148 ns     602830
+FibonnaciIterative/16        1661 ns       1643 ns     433152
+FibonnaciIterative/32        2372 ns       2361 ns     296665
+FibonnaciIterative/40        2551 ns       2546 ns     275310
+FibonnaciRecursive/2           14 ns         14 ns   48525181
+FibonnaciRecursive/4           28 ns         28 ns   24806773
+FibonnaciRecursive/8          156 ns        156 ns    4402820
+FibonnaciRecursive/16        7095 ns       7075 ns      98825
+FibonnaciRecursive/32    15637451 ns   15610444 ns         45
+FibonnaciRecursive/50  91138250241 ns 90809938000 ns          1
+FibonnaciIterative/2          507 ns        499 ns    1401595
+FibonnaciIterative/4          812 ns        802 ns     816041
+FibonnaciIterative/8         1316 ns       1287 ns     607602
+FibonnaciIterative/16        1719 ns       1705 ns     434119
+FibonnaciIterative/32        2668 ns       2649 ns     276627
+FibonnaciIterative/50        2828 ns       2809 ns     235543
+FibonnaciRecursive/2           16 ns         15 ns   46622531
+FibonnaciRecursive/4           30 ns         30 ns   23499080
+FibonnaciRecursive/8          172 ns        170 ns    4459082
+FibonnaciRecursive/16        7724 ns       7612 ns      87275
+FibonnaciRecursive/32    17876766 ns   17641286 ns         42
+^C
 
 ```
 
-```
-
-Can see where it's exponential, where it's squared and where it's logarithmic.
-
+**Had to cancel just because it took 30 minutes and nothing happened.**
 
 
 ## Build
-```sh
-git clone https://github.com/google/benchmark.git
-g++ benching.cpp bubblesort.cpp fibonnaci.cpp quicksort.cpp -o benching.tsk --std=c++11  -lbenchmark -L benchmark/
 ```
+git clone git@github.com:y2kappa/CppProfiling.git
+cd CppProfiling
+git clone git@github.com:google/benchmark.git
+git clone git@github.com:google/googletest.git
+
+mkdir -p _build/fibonnaci
+g++ fibonnaci/fibonnaci.b.cpp fibonnaci/fibonnaci.cpp -o _build/fibonnaci/fibonnaci.b.tsk --std=c++14 -L benchmark/ -lbenchmark
+
+```
+
 
 ## run
 

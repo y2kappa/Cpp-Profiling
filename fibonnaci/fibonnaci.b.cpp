@@ -35,4 +35,7 @@ static void FibonnaciIterative(benchmark::State& state)
 BENCHMARK(FibonnaciRecursive)->RangeMultiplier(2)->Range(2, 40);
 BENCHMARK(FibonnaciIterative)->RangeMultiplier(2)->Range(2, 40);
 
+BENCHMARK(FibonnaciRecursive)->RangeMultiplier(2)->Range(2, 50);
+BENCHMARK(FibonnaciIterative)->RangeMultiplier(2)->Range(2, 50);
+
 BENCHMARK_MAIN();
