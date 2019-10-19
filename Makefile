@@ -37,3 +37,13 @@ quicksort-test: ##@quicksort
 quicksort-bench: ##@quicksort
 	g++ quicksort/quicksort.b.cpp quicksort/quicksort.cpp -o _build/quicksort/quicksort.b.tsk --std=c++14 -L benchmark/ -l benchmark
 	_build/quicksort/quicksort.b.tsk
+
+vector-test: ##@vector
+	mkdir -p _build/vector
+	g++ -o _build/vector/vector.t.tsk vector/vector.cpp vector/vector.t.cpp  --std=c++14 -L googletest/ -l gtest
+	_build/vector/vector.t.tsk
+
+vector-benchmark: ##@vector
+	mkdir -p _build/vector
+	g++ -o _build/vector/vector.b.tsk vector/vector.cpp vector/vector.b.cpp  --std=c++14 -L benchmark/ -l benchmark
+	_build/vector/vector.b.tsk
